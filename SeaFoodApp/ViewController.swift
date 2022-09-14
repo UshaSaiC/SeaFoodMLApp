@@ -23,11 +23,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             imagePicker.sourceType = .photoLibrary
         }
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = false // if we set this value to true, we can edit the image like do croppping and stuff
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+        if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{ // if we set image editing value to true, then the InkoKey value should be modified as editedImage instead of originalImage
             self.cameraImageView.image = userPickedImage
             
             guard let ciImage = CIImage(image: userPickedImage) else{
