@@ -10,6 +10,7 @@ import CoreML
 import Vision
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -32,8 +33,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{ // if we set image editing value to true, then the InkoKey value should be modified as editedImage instead of originalImage
-            self.cameraImageView.image = userPickedImage
+        if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
             
             guard let ciImage = CIImage(image: userPickedImage) else{
                 fatalError("could not convert to CIImage")
@@ -78,12 +78,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let parameters : [String:String] = [
         "format" : "json",
         "action" : "query",
-        "prop" : "extracts",
+        "prop" : "extracts|pageimages",
         "exintro" : "",
         "explaintext" : "",
         "titles" : objectName,
         "indexpageids" : "",
         "redirects" : "1",
+        "pithumbsize" : "500"
         ]
         
         Alamofire.request(wikipediaURL, method: .get, parameters: parameters).responseJSON { response in
@@ -94,7 +95,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 let objectJSON: JSON = JSON(response.result.value!)
                 let pageID = objectJSON["query"]["pageids"][0].stringValue
                 let objectDescription = objectJSON["query"]["pages"][pageID]["extract"].stringValue
-                
+                let objectImageURL = objectJSON["query"]["pages"][pageID]["thumbnail"]["source"].stringValue
+                self.cameraImageView.sd_setImage(with: URL(string: objectImageURL))
                 self.wikiLabel.text = objectDescription
                 
             }
