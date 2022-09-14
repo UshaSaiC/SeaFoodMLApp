@@ -18,7 +18,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         imagePicker.delegate = self
         
-        // simulator doesn't have camera, so alternate is using photoLibrary
         if UIImagePickerController.isSourceTypeAvailable(.camera){
             imagePicker.sourceType = .camera
         } else {
@@ -27,13 +26,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.allowsEditing = false
     }
     
-    // below function is triggered when user has selected an image and we can do something with that image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.cameraImageView.image = userPickedImage
-            
-            // converting UIImage to CIImage (Core Image Image) s this type of image allows us to use Vision framework and Core ML framework
-            
             
             guard let ciImage = CIImage(image: userPickedImage) else{
                 fatalError("could not convert to CIImage")
@@ -55,7 +50,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             guard let results = request.results as? [VNClassificationObservation] else{
                 fatalError("Model failed to process image ")
             }
-            print(results)
+            
+            if let firstResult = results.first{
+                if firstResult.identifier.contains("hotdog"){
+                    self.navigationItem.title = "Hotdog!"
+                }else{
+                    self.navigationItem.title = "Not Hotdog:("
+                }
+            }
         }
         let handler = VNImageRequestHandler(ciImage: image)
         do {
