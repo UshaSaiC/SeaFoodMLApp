@@ -7,5 +7,6 @@ target 'SeaFoodApp' do
   # Pods for SeaFoodApp
     pod 'Alamofire', '~> 4.4'
     pod 'SwiftyJSON'
+    pod 'SDWebImage'
 
 end
