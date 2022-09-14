@@ -14,9 +14,12 @@
 		B209410F28D1C0D1003AEA25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B209410E28D1C0D1003AEA25 /* Assets.xcassets */; };
 		B209411228D1C0D1003AEA25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B209411028D1C0D1003AEA25 /* LaunchScreen.storyboard */; };
 		B209411A28D1C1A4003AEA25 /* Inceptionv3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = B209411928D1C1A4003AEA25 /* Inceptionv3.mlmodel */; };
+		F57935836ACFB7E11A8B53F6 /* Pods_SeaFoodApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6E54C34BBCBE4A600637529 /* Pods_SeaFoodApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55199CC57B1ED0F6DFE8B451 /* Pods-SeaFoodApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaFoodApp.debug.xcconfig"; path = "Target Support Files/Pods-SeaFoodApp/Pods-SeaFoodApp.debug.xcconfig"; sourceTree = "<group>"; };
+		A0B35302042335CF4153CDCE /* Pods-SeaFoodApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeaFoodApp.release.xcconfig"; path = "Target Support Files/Pods-SeaFoodApp/Pods-SeaFoodApp.release.xcconfig"; sourceTree = "<group>"; };
 		B209410228D1C0CE003AEA25 /* SeaFoodApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeaFoodApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B209410528D1C0CE003AEA25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B209410728D1C0CE003AEA25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +29,7 @@
 		B209411128D1C0D1003AEA25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B209411328D1C0D1003AEA25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B209411928D1C1A4003AEA25 /* Inceptionv3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Inceptionv3.mlmodel; sourceTree = "<group>"; };
+		B6E54C34BBCBE4A600637529 /* Pods_SeaFoodApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeaFoodApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F57935836ACFB7E11A8B53F6 /* Pods_SeaFoodApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B8FC3DF54B15C10288490EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6E54C34BBCBE4A600637529 /* Pods_SeaFoodApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB30586F7EFB4AFF43006C42 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				55199CC57B1ED0F6DFE8B451 /* Pods-SeaFoodApp.debug.xcconfig */,
+				A0B35302042335CF4153CDCE /* Pods-SeaFoodApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		B20940F928D1C0CE003AEA25 = {
 			isa = PBXGroup;
 			children = (
 				B209410428D1C0CE003AEA25 /* SeaFoodApp */,
 				B209410328D1C0CE003AEA25 /* Products */,
+				AB30586F7EFB4AFF43006C42 /* Pods */,
+				0B8FC3DF54B15C10288490EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,9 +102,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B209411628D1C0D1003AEA25 /* Build configuration list for PBXNativeTarget "SeaFoodApp" */;
 			buildPhases = (
+				79D971046454B6B62991CB48 /* [CP] Check Pods Manifest.lock */,
 				B20940FE28D1C0CE003AEA25 /* Sources */,
 				B20940FF28D1C0CE003AEA25 /* Frameworks */,
 				B209410028D1C0CE003AEA25 /* Resources */,
+				FDF824019AEA53C5D6BA64BD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -135,6 +162,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79D971046454B6B62991CB48 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeaFoodApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDF824019AEA53C5D6BA64BD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeaFoodApp/Pods-SeaFoodApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeaFoodApp/Pods-SeaFoodApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeaFoodApp/Pods-SeaFoodApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B20940FE28D1C0CE003AEA25 /* Sources */ = {
@@ -286,6 +355,7 @@
 		};
 		B209411728D1C0D1003AEA25 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55199CC57B1ED0F6DFE8B451 /* Pods-SeaFoodApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -313,6 +383,7 @@
 		};
 		B209411828D1C0D1003AEA25 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B35302042335CF4153CDCE /* Pods-SeaFoodApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
