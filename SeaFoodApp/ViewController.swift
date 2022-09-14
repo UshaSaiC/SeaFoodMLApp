@@ -7,10 +7,15 @@
 
 import UIKit
 import CoreML
-import Vision // it helps in processing images easily and allows us to use images to work with CoreML
+import Vision
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let wikipediaURL = "https://en.wikipedia.org/w/api.php"
+    
+    @IBOutlet weak var wikiLabel: UILabel!
     @IBOutlet weak var cameraImageView: UIImageView!
     let imagePicker = UIImagePickerController()
     
@@ -23,11 +28,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             imagePicker.sourceType = .photoLibrary
         }
-        imagePicker.allowsEditing = false // if we set this value to true, we can edit the image like do croppping and stuff
+        imagePicker.allowsEditing = true // if we set this value to true, we can edit the image like do croppping and stuff
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let userPickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{ // if we set image editing value to true, then the InkoKey value should be modified as editedImage instead of originalImage
+        if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{ // if we set image editing value to true, then the InkoKey value should be modified as editedImage instead of originalImage
             self.cameraImageView.image = userPickedImage
             
             guard let ciImage = CIImage(image: userPickedImage) else{
@@ -55,8 +60,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 if firstResult.identifier.contains("hotdog"){
                     self.navigationItem.title = "Hotdog!"
                 }else{
-                    self.navigationItem.title = "Not Hotdog:("
+                    self.navigationItem.title = "Not Hotdog:( but its \(firstResult.identifier.capitalized)"
                 }
+                self.requestInfo(objectName: firstResult.identifier)
             }
         }
         let handler = VNImageRequestHandler(ciImage: image)
@@ -64,6 +70,34 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             try handler.perform([request])
         } catch {
             print(error)
+        }
+    }
+    
+    func requestInfo(objectName: String){
+        
+        let parameters : [String:String] = [
+        "format" : "json",
+        "action" : "query",
+        "prop" : "extracts",
+        "exintro" : "",
+        "explaintext" : "",
+        "titles" : objectName,
+        "indexpageids" : "",
+        "redirects" : "1",
+        ]
+        
+        Alamofire.request(wikipediaURL, method: .get, parameters: parameters).responseJSON { response in
+            if response.result.isSuccess{
+                print("Got wikipedia info")
+                print(response)
+                
+                let objectJSON: JSON = JSON(response.result.value!)
+                let pageID = objectJSON["query"]["pageids"][0].stringValue
+                let objectDescription = objectJSON["query"]["pages"][pageID]["extract"].stringValue
+                
+                self.wikiLabel.text = objectDescription
+                
+            }
         }
     }
     
